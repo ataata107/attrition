@@ -3,6 +3,8 @@
 
 End-to-end ML pipeline to predict employee attrition using the IBM HR Analytics dataset from Kaggle.
 
+**Notebook:** [IBM_HR_Attrition.ipynb](IBM_HR_Attrition.ipynb)
+
 ## What's covered
 - EDA — distributions, correlation heatmap, pairplot, boxplots, stacked bar charts, feature correlation with target
 - Preprocessing — dropped constant/ID columns, label encoded target, one-hot encoded categoricals
