@@ -53,3 +53,65 @@ Groupby-based pattern mining to find employee segments with high attrition rates
 - **Low Job Involvement + Low Environment Satisfaction** combinations push attrition above 80–90%
 - Senior employees (JobLevel Senior/Executive, long tenure) have near-zero attrition (<5%)
 - Strongest 3-column signal: `EnvironmentSatisfaction=Low + MonthlyIncome=Low + OverTime=Yes` → 88% attrition (15/17 employees)
+
+---
+
+## Tableau Dashboard — Attrition Lift Analysis
+
+**Workbook:** [Project2_AssociationRules/Attrition.twbx](Project2_AssociationRules/Attrition.twbx)
+
+The Tableau workbook visualises attrition lift (group attrition rate ÷ company-wide rate of ~16.1%) derived from `attrition_groupby_rules.csv`. A lift of 1.0 means the group leaves at the average rate; above 1.0 means elevated risk.
+
+---
+
+### Chart 1 — Attrition Lift by Job Involvement
+
+![Attrition Lift by Job Involvement](Project2_AssociationRules/viz_lift_by_job_involvement.png)
+
+This chart shows the average attrition lift across all employee groups, broken down by Job Involvement level.
+
+| Job Involvement | Lift |
+|---|---|
+| Low | ~2.1x |
+| Medium | ~1.15x |
+| High | ~0.9x |
+| Very High | ~0.55x |
+
+**What it shows:** A clear monotonic relationship — the less involved an employee feels, the more likely they are to leave. Employees with Low involvement are more than twice as likely to attrite as the average employee, while Very High involvement employees are nearly half as likely.
+
+---
+
+### Chart 2 — Attrition Lift by Job Involvement and Gender
+
+![Attrition Lift by Job Involvement and Gender](Project2_AssociationRules/viz_lift_by_involvement_and_gender.png)
+
+This chart adds Gender as a dimension to see whether the involvement-attrition relationship differs between men and women.
+
+| Job Involvement | Female | Male |
+|---|---|---|
+| Low | ~2.4x | ~1.9x |
+| Medium | ~1.0x | ~1.3x |
+| High | ~1.0x | ~0.9x |
+| Very High | ~0.7x | ~0.5x |
+
+**What it shows:** The overall trend holds for both genders, but the gap is widest at Low involvement — females with low involvement leave at 2.4x the baseline vs 1.9x for males. At High and Very High involvement the gender difference effectively disappears.
+
+---
+
+### Root Cause Analysis (RCA)
+
+**Problem:** Why do certain employee groups show attrition rates 2–4x above the company baseline?
+
+**Finding 1 — Job Involvement is the strongest engagement signal.**
+Across all segments, involvement level is the most consistent predictor of attrition lift. Low involvement is not just a symptom — it is likely a leading indicator: employees disengage before they resign. This suggests attrition is predictable weeks or months in advance if engagement is tracked.
+
+**Finding 2 — Low involvement hits women harder.**
+At the Low involvement tier, female employees show a 26% higher lift than male employees (2.4x vs 1.9x). This may reflect role distribution (e.g. more women in Sales or HR roles with inherently lower involvement scores) or differential responses to disengagement. HR should investigate whether low-involvement female employees are concentrated in specific departments or job roles.
+
+**Finding 3 — Involvement loss compounds with other stressors.**
+From the broader groupby analysis, Low Job Involvement combined with OverTime=Yes or Low Environment Satisfaction pushes attrition rates to 80–90%. Involvement alone is a risk; involvement combined with burnout factors is a near-certain exit signal.
+
+**Recommended actions:**
+- Flag employees with dropping involvement scores for proactive check-ins
+- Audit the distribution of low-involvement roles by gender and department
+- Treat Low Involvement + Overtime as a high-priority retention alert — this combination has the highest concentration of imminent leavers
