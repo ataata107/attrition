@@ -1,8 +1,12 @@
-import pandas as pd
+import os
 import itertools
+import pandas as pd
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # ── Config ───────────────────────────────────────────────────────────────────
-DATA_PATH  = "/Users/shazebata/.cache/kagglehub/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset/versions/1/WA_Fn-UseC_-HR-Employee-Attrition.csv"
+DATA_PATH  = os.getenv("IBM_HR_PATH")
 OUTPUT     = "attrition_groupby_rules.csv"
 MIN_COUNT  = 10   # minimum employees in a group to include it
 MAX_COLS   = 3    # max number of columns to combine (1, 2, or 3)

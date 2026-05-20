@@ -1,3 +1,4 @@
+import os
 from dotenv import load_dotenv
 import pandas as pd
 from langchain_openai import ChatOpenAI
@@ -6,8 +7,8 @@ from langchain_classic.agents.agent_types import AgentType
 
 load_dotenv()
 
-IBM_HR_PATH = "/Users/shazebata/.cache/kagglehub/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset/versions/1/WA_Fn-UseC_-HR-Employee-Attrition.csv"
-RULES_PATH  = "/Users/shazebata/Desktop/ASU/Python/ML/SD/Project2_AssociationRules/attrition_groupby_rules.csv"
+IBM_HR_PATH = os.getenv("IBM_HR_PATH")
+RULES_PATH  = os.getenv("RULES_PATH")
 
 SYSTEM_PROMPT = """You are an HR data analyst assistant.
 

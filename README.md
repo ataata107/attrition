@@ -146,9 +146,17 @@ The agent writes and executes Python/pandas code behind the scenes to answer eac
 ### Running locally
 
 ```bash
-# From the SD root
+# 1. Install dependencies
 uv sync
-# Add your OpenAI key to .env: OPENAI_API_KEY=sk-...
+
+# 2. Configure environment — copy the example and fill in your values
+cp .env.example .env
+# Edit .env with your paths and OpenAI key:
+#   OPENAI_API_KEY=sk-...
+#   IBM_HR_PATH=/path/to/WA_Fn-UseC_-HR-Employee-Attrition.csv
+#   RULES_PATH=/path/to/Project2_AssociationRules/attrition_groupby_rules.csv
+
+# 3. Run
 uv run streamlit run Project3_AgentQA/app.py
 ```
 
