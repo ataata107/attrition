@@ -115,3 +115,45 @@ From the broader groupby analysis, Low Job Involvement combined with OverTime=Ye
 - Flag employees with dropping involvement scores for proactive check-ins
 - Audit the distribution of low-involvement roles by gender and department
 - Treat Low Involvement + Overtime as a high-priority retention alert — this combination has the highest concentration of imminent leavers
+
+---
+
+## Project 3 — Agentic Q&A on Attrition Data
+
+A conversational AI agent that lets anyone ask natural language questions about the IBM HR dataset and attrition patterns — no SQL or Python required.
+
+**Script:** [Project3_AgentQA/agent.py](Project3_AgentQA/agent.py)  
+**App:** [Project3_AgentQA/app.py](Project3_AgentQA/app.py)
+
+### What to expect
+
+![Agent Demo](Project3_AgentQA/viz_agent_demo.png)
+
+The agent is powered by GPT-4o and has access to two live datasets:
+
+- **Raw IBM HR dataset** (`df1`) — 1,470 employees with all original attributes. Ask employee-level questions: averages, distributions, counts by department/role/etc.
+- **Attrition pattern mining results** (`df2`) — 87,114 pre-computed segments. Ask segment-level questions: which groups are highest risk, what combinations drive attrition, lift analysis.
+
+The agent writes and executes Python/pandas code behind the scenes to answer each question, then explains the result in plain English.
+
+### Example questions
+- *"Which department has the highest attrition rate?"*
+- *"What is the average monthly income of employees who left vs stayed?"*
+- *"Which group has the highest attrition lift and what are all the characteristics?"*
+- *"How does overtime affect attrition for sales representatives?"*
+- *"What percentage of young employees with low income left the company?"*
+
+### Running locally
+
+```bash
+# From the SD root
+uv sync
+# Add your OpenAI key to .env: OPENAI_API_KEY=sk-...
+uv run streamlit run Project3_AgentQA/app.py
+```
+
+### Stack
+- **LangChain** + `create_pandas_dataframe_agent` for agent orchestration
+- **GPT-4o** as the reasoning model
+- **Streamlit** for the chat UI
+- **uv** for dependency management

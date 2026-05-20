@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment
+.env
+*.env
+
+# macOS
+.DS_Store
+.icloud
+*.icloud
+
+# Tableau temp files
+.~*.twbr
+
+# Generated data (re-runnable from script)
+Project2_AssociationRules/attrition_groupby_rules.csv
